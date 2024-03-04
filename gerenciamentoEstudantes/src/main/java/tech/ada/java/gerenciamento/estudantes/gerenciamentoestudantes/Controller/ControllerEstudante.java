@@ -44,12 +44,12 @@ public class ControllerEstudante {
     
     @PostMapping("/estudante")
     public ResponseEntity<Estudante> cadastrarEstudante(@RequestBody @Valid EstudanteCadastroDTO request)
-            throws Exception {
+            {
         
         Estudante estudante = modelMapper.map(request, Estudante.class);
-        if (repositorioEstudante.existsByEstudante(estudante)) {
-            throw new Exception("Já existe um estudante com os mesmos detalhes.");
-        }
+    //    if (repositorioEstudante.existsByEstudante(estudante)) {
+     //       throw new Exception("Já existe um estudante com os mesmos detalhes.");
+     //   }
         
         estudante.setEstaAtivo(request.estaAtivo());
         Estudante novoEstudante = repositorioEstudante.save(estudante);
@@ -169,7 +169,6 @@ public class ControllerEstudante {
             return ResponseEntity.ok(estudanteSalvo);
         }
         
-        // Retornar o código 404 se não encontrado
         throw new ResourceNotFoundException("Estudante", "ID", id);
     }
 }
